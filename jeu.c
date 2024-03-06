@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include<time.h>
+
 /* Initialiser le générateur au début du main par la fonction suivante*/
 void init_nb_aleatoire() {
 srandom(time(NULL));
@@ -136,7 +137,6 @@ void proposition_joueur(int **plateau, int **prop, int *nb_touche, int *nb_joue,
         printf("Touche!\n");
         prop[x][y] = 1; 
         (*nb_touche)++;
-        
 
     } else {
         printf("Manqué!\n");
@@ -168,5 +168,6 @@ void affichage_choix_joueur(int **plateau, int **prop, int taille_plateau) {
         printf("\n");
     }
 }
+
 
 
