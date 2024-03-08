@@ -115,6 +115,7 @@ void initialisation_plateau(int **plateau, int taille_plateau) {
 }
 
 
+
 void proposition_joueur(int **plateau, int **prop, int *nb_touche, int *nb_joue, int *nb_touche_nav, int taille_plateau) {
     int x, y;
     printf("Entrez les coordonnées (y x) : ");
