@@ -34,5 +34,8 @@ void initialiser_jeu(int taille, char ***plateau, char ***action_plateau, Navire
 int get_coordonnee_tir(int *x, int *y, int taille);
 void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x, int y, int *tirs, int *navire_coule);
 
+void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int taille);
+void debut_jeu(void);
+
 
 #endif 

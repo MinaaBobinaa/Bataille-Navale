@@ -129,3 +129,35 @@ void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x
     }
 }
 
+void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int taille){
+    int x, y, tirs = 0, navire_coule = 0;
+    while (navire_coule < 5) {
+        if (!get_coordonnee_tir(&x, &y, taille)) continue;
+        if (action_plateau[x][y] != '.') {
+            printf("Déjà joué.\n");
+            continue;
+        }
+        proceder_tir(plateau, action_plateau, navires, x, y, &tirs, &navire_coule);
+        affichage_plateau(action_plateau, taille);
+    }
+    terminer_jeu(tirs);
+}
+void debut_jeu(void){
+    srand(time(NULL));
+    int taille = valider_taille_plateau();
+    char **plateau = allouer_plateau(taille);
+    char **action_plateau = allouer_plateau(taille);
+
+    Navire navires[5] = {
+        {{0}, 5, "Porte-avions", 0},
+        {{0}, 4, "Croiseur", 0},
+        {{0}, 3, "Contre-torpilleur 1", 0},
+        {{0}, 3, "Contre-torpilleur 2", 0},
+        {{0}, 2, "Torpilleur", 0}
+    };
+
+    initialiser_jeu(taille, &plateau, &action_plateau, navires);
+    jouer_jeu(plateau, action_plateau, navires, taille);
+    free_plateau(plateau, taille);
+    free_plateau(action_plateau, taille);
+}
