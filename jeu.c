@@ -149,11 +149,11 @@ void debut_jeu(void){
     char **action_plateau = allouer_plateau(taille);
 
     Navire navires[5] = {
-        {{0}, 5, "Porte-avions", 0},
-        {{0}, 4, "Croiseur", 0},
-        {{0}, 3, "Contre-torpilleur 1", 0},
-        {{0}, 3, "Contre-torpilleur 2", 0},
-        {{0}, 2, "Torpilleur", 0}
+        {{{0, 0}}, 5, "Porte-avions", 0},
+        {{{0, 0}}, 4, "Croiseur", 0},
+        {{{0, 0}}, 3, "Contre-torpilleur 1", 0},
+        {{{0, 0}}, 3, "Contre-torpilleur 2", 0},
+        {{{0, 0}}, 2, "Torpilleur", 0}
     };
 
     initialiser_jeu(taille, &plateau, &action_plateau, navires);
