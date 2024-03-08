@@ -1,1 +1,4 @@
-main
+bataille_navale
+
+# Ignore files with extensions .o
+.o
