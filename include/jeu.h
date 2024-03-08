@@ -19,6 +19,9 @@ typedef struct {
 } Navire;
 
 
+void commencer_jeu(void);
+void terminer_jeu(int shots);
+
 char **allouer_plateau(int taille);
 void free_plateau(char **plateau, int taille);
 int verifier_placement(char **plateau, Case debut, int taille, int direction, int taille_plateau);

@@ -4,6 +4,19 @@
 #include <time.h>
 
 
+void commencer_jeu() {
+    printf("================================================\n");
+    printf("Bienvenue dans le jeu de bataille navale !\n");
+    printf("================================================\n");
+}
+
+void terminer_jeu(int shots) {
+    printf("================================================\n");
+    printf("Bravo !! Vous avez gagné en %d coups.\n", shots);
+    printf("================================================\n");
+}
+
+
 char **allouer_plateau(int taille) {
     char **plateau = (char **)malloc(taille * sizeof(char *));
     for (int i = 0; i < taille; i++) {
