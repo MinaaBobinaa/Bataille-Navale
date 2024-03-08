@@ -19,9 +19,8 @@ typedef struct {
 } Navire;
 
 
-int demanderTaillePlateau();
-int verifierPlageTaille(int taille);
-int verifierEntreeNombre(int resultat);
+char **allouer_plateau(int taille);
+void free_plateau(char **plateau, int taille);
 
 
 #endif 
