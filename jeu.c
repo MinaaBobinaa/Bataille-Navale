@@ -10,9 +10,9 @@ void commencer_jeu() {
     printf("================================================\n");
 }
 
-void terminer_jeu(int shots) {
+void terminer_jeu(int tirs) {
     printf("================================================\n");
-    printf("Bravo !! Vous avez gagné en %d coups.\n", shots);
+    printf("Bravo !! Vous avez gagné en %d coups.\n", tirs);
     printf("================================================\n");
 }
 
@@ -86,5 +86,26 @@ void touche_navire(Navire *navire, int x, int y, int *navire_coule){
     }
 }
 
+int valider_taille_plateau(void){
+    int taille;
+    do {
+        printf("Entrez la taille du plateau de jeu (min %d, max %d): ", TAILLE_MIN_PLATEAU, TAILLE_MAX_PLATEAU);
+        scanf("%d", &taille);
+        if (taille < TAILLE_MIN_PLATEAU || taille > TAILLE_MAX_PLATEAU) {
+            printf("Taille invalide. La taille doit être entre %d et %d.\n", TAILLE_MIN_PLATEAU, TAILLE_MAX_PLATEAU);
+        }
+    } while (taille < TAILLE_MIN_PLATEAU || taille > TAILLE_MAX_PLATEAU);
+    return taille;
+}
 
+void initialiser_jeu(int taille, char ***plateau, char ***action_plateau, Navire navires[]){
+    *plateau = allouer_plateau(taille);
+    *action_plateau = allouer_plateau(taille);
+    for (int i = 0; i < 5; i++) {
+        placer_navire(*plateau, &navires[i], taille);
+    }
+}
+
+//int get_coordonnee_tir(int *x, int *y, int taille);
+//void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x, int y, int *tirs, int *navire_coule);
 
