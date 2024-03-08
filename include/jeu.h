@@ -12,7 +12,7 @@ typedef struct {
 
 // Définition de la structure Navire
 typedef struct {
-    Position positions[5];
+    Case positions[5];
     int taille;
     char *nom;
     int touche;
@@ -21,6 +21,10 @@ typedef struct {
 
 char **allouer_plateau(int taille);
 void free_plateau(char **plateau, int taille);
+int verifier_placement(char **plateau, Case debut, int taille, int direction, int taille_plateau);
+void placer_navire(char **plateau, Navire *navire, int taille_plateau);
+void affichage_plateau(char **plateau, int taille);
+void touche_navire(Navire *navire, int x, int y, int *navire_coule);
 
 
 #endif 
