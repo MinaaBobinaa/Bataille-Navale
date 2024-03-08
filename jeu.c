@@ -106,6 +106,26 @@ void initialiser_jeu(int taille, char ***plateau, char ***action_plateau, Navire
     }
 }
 
-//int get_coordonnee_tir(int *x, int *y, int taille);
-//void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x, int y, int *tirs, int *navire_coule);
+int get_coordonnee_tir(int *x, int *y, int taille){
+    printf("Entrez les coordonnées de tir (x y): ");
+    scanf("%d %d", x, y);
+    if (*x < 0 || *y < 0 || *x >= taille || *y >= taille) {
+        printf("Coordonnées hors du plateau.\n");
+        return 0;
+    }
+    return 1;
+}
+
+void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x, int y, int *tirs, int *navire_coule){
+    (*tirs)++;
+    if (plateau[x][y] == 'S') {
+        action_plateau[x][y] = 'x';
+        for (int i = 0; i < 5; i++) {
+            touche_navire(&navires[i], x, y, navire_coule);
+        }
+    } else {
+        action_plateau[x][y] = 'o';
+        printf("À l'eau!\n");
+    }
+}
 
