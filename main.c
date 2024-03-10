@@ -10,8 +10,20 @@ int main(int argc, char** argv) {
 	
     int choix;
     char buffer[100];
+    char *fichier_stats = NULL;
 
-    commencer_jeu();
+    for (int i = 1; i < argc; i++) {
+        if (strcmp(argv[i], "-S") == 0 && i + 1 < argc) {
+            fichier_stats = argv[++i]; // Prend le nom du fichier de statistiques
+        }
+    }
+
+    GameStats stats;
+    if (fichier_stats) {
+        init_stats(&stats);
+    }   
+
+    commencer_jeu();    
 
     while (1) {
         printf("Choisissez une option :\n\n");
@@ -28,7 +40,12 @@ int main(int argc, char** argv) {
 
         switch (choix) {
             case 1:
-                debut_jeu();
+                if (fichier_stats) {
+                    debut_jeu(&stats);
+                    write_stats_file(&stats, fichier_stats);
+                } else {
+                    debut_jeu(NULL);
+                }
                 break;
             case 2:
                 printf("Merci d'avoir joué. À bientôt!\n\n");

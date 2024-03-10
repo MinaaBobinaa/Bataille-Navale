@@ -76,11 +76,11 @@ void touche_navire(Navire *navire, int x, int y, int *navire_coule, GameStats *s
     for (int i = 0; i < navire->taille; i++) {
         if (navire->positions[i].x == x && navire->positions[i].y == y) {
             navire->touche++;
-            if (stats) stats->totalHits++;
+            if (stats) stats->coups_touche++;
             if (navire->touche == navire->taille) {
                 (*navire_coule)++;
                 if (stats) {
-                    strcpy(stats->lastSunkShip, navire->nom); // Enregistre le dernier navire coulé
+                    strcpy(stats->dernier_navire, navire->nom); // Enregistre le dernier navire coulé
                 }
                 printf("Vous avez coulé un(e) %s!\n", navire->nom);
             } else {
@@ -173,9 +173,9 @@ void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x
     } else {
         action_plateau[x][y] = 'o';
         printf("À l'eau!\n");
-        if (stats) stats->totalMisses++;
+        if (stats) stats->coups_eau++;
     }
-    if (stats) stats->totalShots++;
+    if (stats) stats->nbr_total_tirs++;
 }
 
 void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int taille, GameStats *stats){
@@ -183,7 +183,7 @@ void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int tail
     while (navire_coule < 5) {
         if (!get_coordonnee_tir(&x, &y, taille)) continue;
         if (action_plateau[x][y] != '.') {
-            if (stats) stats->totalRepeats++;
+            if (stats) stats->deja_joue++;
             printf("Déjà joué.\n");
             continue;
         }
