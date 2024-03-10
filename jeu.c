@@ -1,8 +1,9 @@
 #include "include/jeu.h"
+#include "include/stats.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <time.h>
-
 
 void commencer_jeu() {
     printf("================================================\n");
@@ -71,12 +72,16 @@ void affichage_plateau(char **plateau, int taille){
     }
 }
 
-void touche_navire(Navire *navire, int x, int y, int *navire_coule){
+void touche_navire(Navire *navire, int x, int y, int *navire_coule, GameStats *stats){
     for (int i = 0; i < navire->taille; i++) {
         if (navire->positions[i].x == x && navire->positions[i].y == y) {
             navire->touche++;
+            if (stats) stats->totalHits++;
             if (navire->touche == navire->taille) {
                 (*navire_coule)++;
+                if (stats) {
+                    strcpy(stats->lastSunkShip, navire->nom); // Enregistre le dernier navire coulé
+                }
                 printf("Vous avez coulé un(e) %s!\n", navire->nom);
             } else {
                 printf("Touché!\n");
@@ -106,43 +111,88 @@ void initialiser_jeu(int taille, char ***plateau, char ***action_plateau, Navire
     }
 }
 
-int get_coordonnee_tir(int *x, int *y, int taille){
-    printf("Entrez les coordonnées de tir (x y): ");
-    scanf("%d %d", x, y);
-    if (*x < 0 || *y < 0 || *x >= taille || *y >= taille) {
-        printf("Coordonnées hors du plateau.\n");
+void nettoyer_stdin(void) {
+    int c;
+    while ((c = getchar()) != '\n' && c != EOF) { }
+}
+
+int lire_coordonnees(char *input, int *x, int *y) {
+    if (sscanf(input, "%d %d", x, y) != 2) {
+        printf("Entrée non valide. Veuillez entrer des nombres.\n");
+        nettoyer_stdin();
         return 0;
     }
     return 1;
 }
 
-void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x, int y, int *tirs, int *navire_coule){
+int verifier_coordonnees(int x, int y, int taille) {
+    if (x < 0 || y < 0 || x >= taille || y >= taille) {
+        printf("Coordonnées hors du plateau. Veuillez entrer des coordonnées valides entre 0 et %d pour les deux axes.\n", taille - 1);
+        return 0; 
+    }
+    return 1;
+}
+
+int lire_entree_utilisateur(int *x, int *y, int taille) {
+    char input[100];
+    while (1) {
+        printf("Entrez les coordonnées de tir (x y): ");
+        if (!fgets(input, sizeof(input), stdin)) {
+            printf("Erreur de lecture.\n");
+            continue;
+        }
+        if (strlen(input) <= 1) {
+            continue; 
+        }
+        if (!lire_coordonnees(input, x, y) || !verifier_coordonnees(*x, *y, taille)) {
+            continue;
+        }
+        return 1; 
+    }
+}
+
+
+int get_coordonnee_tir(int *x, int *y, int taille){
+    while (!lire_entree_utilisateur(x, y, taille)) {
+        scanf("%d %d", x, y);
+        if (*x < 0 || *y < 0 || *x >= taille || *y >= taille) {
+            printf("Coordonnées hors du plateau.\n");
+            return 0;
+        }
+    }
+    return 1;
+}
+
+void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x, int y, int *tirs, int *navire_coule, GameStats *stats){
     (*tirs)++;
     if (plateau[x][y] == 'S') {
         action_plateau[x][y] = 'x';
         for (int i = 0; i < 5; i++) {
-            touche_navire(&navires[i], x, y, navire_coule);
+            touche_navire(&navires[i], x, y, navire_coule, stats);
         }
     } else {
         action_plateau[x][y] = 'o';
         printf("À l'eau!\n");
+        if (stats) stats->totalMisses++;
     }
+    if (stats) stats->totalShots++;
 }
 
-void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int taille){
+void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int taille, GameStats *stats){
     int x, y, tirs = 0, navire_coule = 0;
     while (navire_coule < 5) {
         if (!get_coordonnee_tir(&x, &y, taille)) continue;
         if (action_plateau[x][y] != '.') {
+            if (stats) stats->totalRepeats++;
             printf("Déjà joué.\n");
             continue;
         }
-        proceder_tir(plateau, action_plateau, navires, x, y, &tirs, &navire_coule);
+        proceder_tir(plateau, action_plateau, navires, x, y, &tirs, &navire_coule, stats);
         affichage_plateau(action_plateau, taille);
     }
     terminer_jeu(tirs);
 }
-void debut_jeu(void){
+void debut_jeu(GameStats *stats){
     srand(time(NULL));
     int taille = valider_taille_plateau();
     char **plateau = allouer_plateau(taille);
@@ -157,7 +207,7 @@ void debut_jeu(void){
     };
 
     initialiser_jeu(taille, &plateau, &action_plateau, navires);
-    jouer_jeu(plateau, action_plateau, navires, taille);
+    jouer_jeu(plateau, action_plateau, navires, taille, stats);
     free_plateau(plateau, taille);
     free_plateau(action_plateau, taille);
 }
