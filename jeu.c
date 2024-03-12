@@ -76,11 +76,15 @@ void touche_navire(Navire *navire, int x, int y, int *navire_coule, GameStats *s
     for (int i = 0; i < navire->taille; i++) {
         if (navire->positions[i].x == x && navire->positions[i].y == y) {
             navire->touche++;
+             if (navire->touche == 1 && stats && !stats->premier_touche) {
+                stats->nbr_lettres = navire->nbr_lettres;
+                stats->premier_touche = 1;
+            }
             if (stats) stats->coups_touche++;
             if (navire->touche == navire->taille) {
                 (*navire_coule)++;
                 if (stats) {
-                    strcpy(stats->dernier_navire, navire->nom); // Enregistre le dernier navire coulé
+                    strcpy(stats->dernier_navire, navire->nom);
                 }
                 printf("Vous avez coulé un(e) %s!\n", navire->nom);
             } else {
@@ -199,11 +203,11 @@ void debut_jeu(GameStats *stats){
     char **action_plateau = allouer_plateau(taille);
 
     Navire navires[5] = {
-        {{{0, 0}}, 5, "Porte-avions", 0},
-        {{{0, 0}}, 4, "Croiseur", 0},
-        {{{0, 0}}, 3, "Contre-torpilleur 1", 0},
-        {{{0, 0}}, 3, "Contre-torpilleur 2", 0},
-        {{{0, 0}}, 2, "Torpilleur", 0}
+        {{{0, 0}}, 5, "Porte-avions", 0, 10},
+        {{{0, 0}}, 4, "Croiseur", 0, 7},
+        {{{0, 0}}, 3, "Contre-torpilleur 1", 0, 10},
+        {{{0, 0}}, 3, "Contre-torpilleur 2", 0, 10},
+        {{{0, 0}}, 2, "Torpilleur", 0, 8}
     };
 
     initialiser_jeu(taille, &plateau, &action_plateau, navires);
