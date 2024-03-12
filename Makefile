@@ -1,8 +1,8 @@
 CC=gcc
 CFLAGS = -Wall -Wextra -std=c11
-SOURCES = main.c jeu.c
+SOURCES = main.c jeu.c stats.c
 OBJECTS=$(SOURCES:.c=.o)
-TARGET=bataille_navale
+TARGET=bataille_navale stats.txt
 
 
 all: $(TARGET)

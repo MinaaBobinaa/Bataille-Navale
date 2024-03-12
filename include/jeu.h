@@ -18,6 +18,7 @@ typedef struct {
     int taille;
     char *nom;    
     int touche;
+    int nbr_lettres;
 } Navire;
 
 
