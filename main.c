@@ -12,9 +12,12 @@ int main(int argc, char** argv) {
     char buffer[100];
     char *fichier_stats = NULL;
 
-    for (int i = 1; i < argc; i++) {
-        if (strcmp(argv[i], "-S") == 0 && i + 1 < argc) {
-            fichier_stats = argv[++i]; // Prend le nom du fichier de statistiques
+    if (argc > 1) {
+        if (argc == 3 && strcmp(argv[1], "-S") == 0) {
+            fichier_stats = argv[2];
+        } else {
+            fprintf(stderr, "Usage: %s [-S stats.txt]\n", argv[0]);
+            return 1;
         }
     }
 

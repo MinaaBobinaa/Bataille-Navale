@@ -5,6 +5,14 @@
 
 #define TAILLE_MIN_PLATEAU 6
 #define TAILLE_MAX_PLATEAU 100
+#define MESSAGE_DEBUT_JEU \
+    "================================================\n" \
+    "Bienvenue dans le jeu de bataille navale !\n" \
+    "================================================\n"
+#define MESSAGE_FIN_JEU \
+    "================================================\n" \
+    "Bravo !! Vous avez gagné en %d coups.\n" \
+    "================================================\n"
 
 // Définition de la structure Case
 typedef struct {
