@@ -68,7 +68,7 @@ void affichage_plateau(char **plateau, int taille){
     }
 }
 
-void touche_navire(Navire *navire, int x, int y, int *navire_coule, GameStats *stats){
+void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats){
     for (int i = 0; i < navire->taille; i++) {
         if (navire->positions[i].x == x && navire->positions[i].y == y) {
             navire->touche++;
@@ -81,6 +81,14 @@ void touche_navire(Navire *navire, int x, int y, int *navire_coule, GameStats *s
                 (*navire_coule)++;
                 if (stats) {
                     strcpy(stats->dernier_navire, navire->nom);
+                }
+
+                for (int j = 0; j < navire->taille; j++) {
+                    int posX = navire->positions[j].x;
+                    int posY = navire->positions[j].y;
+                    plateau[posX][posY] = 'C'; // Marque les parties du navire coulé sur le plateau de jeu
+                    action_plateau[posX][posY] = '+';
+
                 }
                 printf("Vous avez coulé un(e) %s!\n", navire->nom);
             } else {
@@ -168,7 +176,7 @@ void proceder_tir(char **plateau, char **action_plateau, Navire navires[], int x
     if (plateau[x][y] == 'S') {
         action_plateau[x][y] = 'x';
         for (int i = 0; i < 5; i++) {
-            touche_navire(&navires[i], x, y, navire_coule, stats);
+            touche_navire(&navires[i], x, y, plateau, action_plateau, navire_coule, stats);
         }
     } else {
         action_plateau[x][y] = 'o';

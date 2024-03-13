@@ -1,0 +1,6 @@
+Nombre total de coups: 31
+Nombre de lettres sans doublon du premier navire touché: 10
+Nombre total de coups à l’eau: 14
+Nombre total de coups déjà joué: 0
+Nombre total de coups touché: 17
+Nom du dernier navire coulé: Torpilleur
