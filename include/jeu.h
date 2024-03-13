@@ -6,27 +6,27 @@
 #define TAILLE_MIN_PLATEAU 6
 #define TAILLE_MAX_PLATEAU 100
 #define MESSAGE_DEBUT_JEU \
-    "================================================\n" \
-    "Bienvenue dans le jeu de bataille navale !\n" \
-    "================================================\n"
+   "================================================\n" \
+   "Bienvenue dans le jeu de bataille navale !\n" \
+   "================================================\n"
 #define MESSAGE_FIN_JEU \
-    "================================================\n" \
-    "Bravo !! Vous avez gagné en %d coups.\n" \
-    "================================================\n"
+   "================================================\n" \
+   "Bravo !! Vous avez gagné en %d coups.\n" \
+   "================================================\n"
 
 // Définition de la structure Case
 typedef struct {
-    int x;
-    int y; 
+   int x;
+   int y; 
 } Case;
 
 // Définition de la structure Navire
 typedef struct {
-    Case positions[5];
-    int taille;
-    char *nom;    
-    int touche;
-    int nbr_lettres;
+   Case positions[5];
+   int taille;
+   char *nom;    
+   int touche;
+   int nbr_lettres;
 } Navire;
 
 
