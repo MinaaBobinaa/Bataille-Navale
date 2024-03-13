@@ -38,7 +38,7 @@ void free_plateau(char **plateau, int taille);
 int verifier_placement(char **plateau, Case debut, int taille, int direction, int taille_plateau);
 void placer_navire(char **plateau, Navire *navire, int taille_plateau);
 void affichage_plateau(char **plateau, int taille);
-void touche_navire(Navire *navire, int x, int y, int *navire_coule, GameStats *stats);
+void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
 int valider_taille_plateau(void);
 void initialiser_jeu(int taille, char ***plateau, char ***action_plateau, Navire navires[]);
