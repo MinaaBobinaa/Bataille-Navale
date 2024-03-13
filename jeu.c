@@ -6,15 +6,11 @@
 #include <time.h>
 
 void commencer_jeu() {
-    printf("================================================\n");
-    printf("Bienvenue dans le jeu de bataille navale !\n");
-    printf("================================================\n");
+    printf(MESSAGE_DEBUT_JEU);
 }
 
 void terminer_jeu(int tirs) {
-    printf("================================================\n");
-    printf("Bravo !! Vous avez gagné en %d coups.\n", tirs);
-    printf("================================================\n");
+    printf(MESSAGE_FIN_JEU, tirs);
 }
 
 
