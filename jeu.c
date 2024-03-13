@@ -200,6 +200,7 @@ void jouer_jeu(char **plateau, char **action_plateau, Navire navires[], int tail
     }
     terminer_jeu(tirs);
 }
+
 void debut_jeu(GameStats *stats){
     srand(time(NULL));
     int taille = valider_taille_plateau();
