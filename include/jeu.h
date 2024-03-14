@@ -9,6 +9,10 @@
    "================================================\n" \
    "Bienvenue dans le jeu de bataille navale !\n" \
    "================================================\n"
+#define MENU \
+   "Choisissez une option :\n\n" \
+   "1. Nouvelle partie\n" \
+   "2. Quitter\n\n"
 #define MESSAGE_FIN_JEU \
    "================================================\n" \
    "Bravo !! Vous avez gagné en %d coups.\n" \
@@ -33,6 +37,11 @@ typedef struct {
  * Démarre le jeu en affichant un message de bienvenue
  */
 void commencer_jeu(void);
+
+/**
+ * Affiche menu du jeu
+ */
+void menu(void);
 
 /**
  * Termine le jeu en affichant un message de fin
