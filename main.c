@@ -7,7 +7,7 @@
 
 
 int main(int argc, char** argv) {
-	
+   
    int choix;
    char buffer[100];
    char *fichier_stats = NULL;
@@ -29,9 +29,7 @@ int main(int argc, char** argv) {
    commencer_jeu();    
 
    while (1) {
-      printf("Choisissez une option :\n\n");
-      printf("1. Nouvelle partie\n");
-      printf("2. Quitter\n\n");
+      menu();
       if (!fgets(buffer, sizeof(buffer), stdin)) {
          continue;
       }
