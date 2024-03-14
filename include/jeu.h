@@ -41,7 +41,7 @@ void placer_navire(char **plateau, Navire *navire, int taille_plateau);
 void affichage_plateau(char **plateau, int taille);
 void enregstr_prem_touch(GameStats *stats, Navire *navire);
 void marquer_navire_coule(char **plateau, char **action_plateau, Navire *navire, GameStats *stats);
-void gerer_touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
+void gerer_touche_navire(Navire *navire, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
 int valider_taille_plateau(void);
