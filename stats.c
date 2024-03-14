@@ -12,7 +12,6 @@ void init_stats(GameStats *stats) {
    stats->premier_touche = 0;     
 }
 
-
 void write_stats_file(const GameStats *stats, const char *nom_fichier) {
    FILE *file = fopen(nom_fichier, "w");
    if (file) {
