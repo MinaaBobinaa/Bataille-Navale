@@ -84,7 +84,7 @@ void marquer_navire_coule(char **plateau, char **action_plateau, Navire *navire,
    strcpy(stats->dernier_navire, navire->nom);
 }
 
-void gerer_touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats) {
+void gerer_touche_navire(Navire *navire, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats) {
    navire->touche++;
    if (navire->touche == 1) {
       enregstr_prem_touch(stats, navire);
@@ -102,7 +102,7 @@ void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_p
    for (int i = 0; i < navire->taille; i++) {
       if (navire->positions[i].x == x && navire->positions[i].y == y) {
          if (stats) stats->coups_touche++;
-         gerer_touche_navire(navire, x, y, plateau, action_plateau, navire_coule, stats);
+         gerer_touche_navire(navire, plateau, action_plateau, navire_coule, stats);
          return;
       }
    }
