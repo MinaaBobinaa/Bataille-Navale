@@ -5,6 +5,7 @@
 #include <string.h>
 #include <time.h>
 
+
 void commencer_jeu() {
    printf(MESSAGE_DEBUT_JEU);
 }
@@ -71,45 +72,34 @@ void affichage_plateau(char **plateau, int taille){
     }
 }
 
-void enregstr_prem_touch(GameStats *stats, Navire *navire) {
-   if (!stats->premier_touche) {
-      stats->nbr_lettres = navire->nbr_lettres;
-      stats->premier_touche = 1;
-   }
-}
-
-void marquer_navire_coule(char **plateau, char **action_plateau, Navire *navire, GameStats *stats) {
-   for (int j = 0; j < navire->taille; j++) {
-      int posX = navire->positions[j].x;
-      int posY = navire->positions[j].y;
-      plateau[posX][posY] = 'C';
-      action_plateau[posX][posY] = '+';
-   }
-   strcpy(stats->dernier_navire, navire->nom);
-}
-
-void gerer_touche_navire(Navire *navire, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats) {
-   navire->touche++;
-   if (navire->touche == 1) {
-      enregstr_prem_touch(stats, navire);
-   }
-   if (navire->touche == navire->taille) {
-      (*navire_coule)++;
-      marquer_navire_coule(plateau, action_plateau, navire, stats);
-      printf("Vous avez coulé un(e) %s!\n", navire->nom);
-   } else {
-      printf("Touché!\n");
-   }
-}
-
-void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats) {
+void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats){
    for (int i = 0; i < navire->taille; i++) {
       if (navire->positions[i].x == x && navire->positions[i].y == y) {
-         if (stats) stats->coups_touche++;
-         gerer_touche_navire(navire, plateau, action_plateau, navire_coule, stats);
-         return;
-      }
-   }
+         navire->touche++;
+            if (navire->touche == 1 && stats && !stats->premier_touche) {
+               stats->nbr_lettres = navire->nbr_lettres;
+               stats->premier_touche = 1;
+            }
+            if (stats) stats->coups_touche++;
+            if (navire->touche == navire->taille) {
+               (*navire_coule)++;
+               if (stats) {
+                  strcpy(stats->dernier_navire, navire->nom);
+               }
+
+               for (int j = 0; j < navire->taille; j++) {
+                  int posX = navire->positions[j].x;
+                  int posY = navire->positions[j].y;
+                  plateau[posX][posY] = 'C'; 
+                  action_plateau[posX][posY] = '+';
+               }
+               printf("Vous avez coulé un(e) %s!\n", navire->nom);
+            } else {
+               printf("Touché!\n");
+            }
+            return;
+        }
+    }
 }
 
 int valider_taille_plateau(void){

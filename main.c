@@ -7,7 +7,7 @@
 
 
 int main(int argc, char** argv) {
-	
+   
    int choix;
    char buffer[100];
    char *fichier_stats = NULL;
