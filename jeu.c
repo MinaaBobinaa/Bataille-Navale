@@ -9,6 +9,10 @@ void commencer_jeu() {
    printf(MESSAGE_DEBUT_JEU);
 }
 
+void menu() {
+   printf(MENU);
+}
+
 void terminer_jeu(int tirs) {
    printf(MESSAGE_FIN_JEU, tirs);
 }
