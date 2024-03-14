@@ -17,7 +17,7 @@ int main(int argc, char** argv) {
          fichier_stats = argv[2];
       } else {
          fprintf(stderr, "Usage: %s [-S stats.txt]\n", argv[0]);
-         return 1;
+         exit(1);
       }
    }
 
