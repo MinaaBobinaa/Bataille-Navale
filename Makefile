@@ -31,5 +31,6 @@ test-bataille_navale: $(TARGET) bataille_navale.bats
 clean:
 	rm -f $(OBJECTS) $(TARGET) $(FILE)
 
-
+#Phony
+#----
 .PHONY: build test clean
