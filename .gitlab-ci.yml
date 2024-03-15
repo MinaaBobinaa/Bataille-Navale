@@ -3,7 +3,6 @@ image: gcc:latest
 stages:
   - build
   - test
-  - clean
 
 before_script:
   - apt-get update && apt-get install -y bats
@@ -17,8 +16,3 @@ test_job:
   stage: test
   script:
     - make test
-
-clean_job:
-  stage: clean
-  script:
-    - make clean
