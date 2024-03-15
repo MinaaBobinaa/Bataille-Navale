@@ -5,10 +5,16 @@ stages:
   - test
 
 before_script:
-  - apt-get update && apt-get install -y bats
+  - apt-get update && apt-get install -y gcc make bats
 
 build_job:
   stage: build
   script:
     - make build
 
+test_job:
+  stage: test
+  script:
+    - make test
+  dependencies:
+    - build_job
