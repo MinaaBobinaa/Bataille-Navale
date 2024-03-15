@@ -1,7 +1,7 @@
 prog=bataille_navale
 setup() {
-  load 'bats/test/test_helper/bats-support/load'
-  load 'bats/test/test_helper/bats-assert/load'
+  load 'bats/bats-support/load'
+  load 'bats/bats-assert/load'
 }
 
 @test "Test 1" {
