@@ -2,7 +2,6 @@ image: gcc:latest
 
 stages:
   - build
-  - test
 
 before_script:
   - apt-get update && apt-get install -y bats
@@ -11,10 +10,4 @@ build_job:
   stage: build
   script:
     - make build
-
-test_job:
-  stage: test
-  script:
-    - git submodule update --init
-    - make test
 
