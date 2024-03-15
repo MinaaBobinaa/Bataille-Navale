@@ -149,6 +149,7 @@ int verifier_coordonnees(int x, int y, int taille) {
 int lire_entree_utilisateur(int *x, int *y, int taille) {
    char input[100];
    while (1) {
+      nettoyer_stdin();
       printf("Entrez les coordonnées de tir (x y): ");
       if (!fgets(input, sizeof(input), stdin)) {
          printf("Erreur de lecture.\n");
