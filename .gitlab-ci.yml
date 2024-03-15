@@ -15,4 +15,5 @@ build_job:
 test_job:
   stage: test
   script:
+    - git submodule update --init --recursive
     - make test
