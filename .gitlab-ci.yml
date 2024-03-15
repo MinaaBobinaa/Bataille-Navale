@@ -16,3 +16,4 @@ test_job:
   stage: test
   script:
     - make test
+
