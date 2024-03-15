@@ -1,0 +1,27 @@
+stages:
+  - build
+  - test
+
+variables:
+  bats: "bats/bats-core/bin/bats"
+  CC: "gcc"
+  CFLAGS: "-Wall -Wextra -std=c99"
+
+before_script:
+  - apt-get update && apt-get install -y gcc make
+
+build_job:
+  stage: build
+  script:
+    - make build
+  artifacts:
+    paths:
+      - bataille_navale
+
+test_job:
+  stage: test
+  script:
+    - git submodule update --init --recursive
+    - make test
+  dependencies:
+    - build_job
