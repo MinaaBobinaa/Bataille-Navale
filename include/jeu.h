@@ -120,18 +120,18 @@ void gerer_touche(Navire *navire, GameStats *stats);
  */
 void gerer_navire_coule(Navire *navire, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
-// /**
-//  * Détecte si un tir touche une partie d'un navire sur le plateau. Parcourt les positions
-//  * d'un navire donné pour vérifier si le tir (x, y) le touche
-//  *
-//  * @param navire Pointeur vers le navire à vérifier
-//  * @param x Coordonnée X du tir
-//  * @param y Coordonnée Y du tir
-//  * @param plateau Pointeur vers le plateau de jeu principal
-//  * @param action_plateau Pointeur vers le plateau d'action utilisé pour marquer les tirs
-//  * @param navire_coule Pointeur vers le compteur des navires coulés
-//  * @param stats Pointeur vers les statistiques du jeu
-//  */
+/**
+ * Détecte si un tir touche une partie d'un navire sur le plateau. Parcourt les positions
+ * d'un navire donné pour vérifier si le tir (x, y) le touche
+ *
+ * @param navire Pointeur vers le navire à vérifier
+ * @param x Coordonnée X du tir
+ * @param y Coordonnée Y du tir
+ * @param plateau Pointeur vers le plateau de jeu principal
+ * @param action_plateau Pointeur vers le plateau d'action utilisé pour marquer les tirs
+ * @param navire_coule Pointeur vers le compteur des navires coulés
+ * @param stats Pointeur vers les statistiques du jeu
+ */
 void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
 /**
