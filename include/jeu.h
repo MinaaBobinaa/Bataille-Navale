@@ -100,38 +100,25 @@ void placer_navire(char **plateau, Navire *navire, int taille_plateau);
 void affichage_plateau(char **plateau, int taille);
 
 /**
- * Enregistre le premier navire touché dans les statistiques du jeu. Cet enregistrement
- * n'est effectué que lors du premier coup touchant un navire.
+ * Gère une touche sur un navire en incrémentant le nombre de touches reçues par ce navire
+ * Si c'est la première touche reçue par le navire, met à jour les statistiques
  *
- * @param stats Pointeur vers la structure GameStats contenant les statistiques du jeu
- * @param navire Pointeur vers la structure Navire qui a été touchée
+ * @param navire Un pointeur vers le Navire touché
+ * @param stats Un pointeur vers les statistiques globales du jeu pour la mise à jour
  */
-// void enregstr_prem_touch(GameStats *stats, Navire *navire);
+void gerer_touche(Navire *navire, GameStats *stats);
 
-// /**
-//  * Marque un navire comme coulé sur le plateau et sur le plateau d'action.
-//  *
-//  * @param plateau Pointeur vers le plateau de jeu principal
-//  * @param action_plateau Pointeur vers le plateau d'action utilisé pour marquer les tirs
-//  * @param navire Pointeur vers le navire qui a été coulé
-//  * @param stats Pointeur vers les statistiques du jeu pour mise à jour
-//  */
-// void marquer_navire_coule(char **plateau, char **action_plateau, Navire *navire, GameStats *stats);
-
-// /**
-//  * Gère un coup touchant un navire, mettant à jour l'état du navire et du jeu.
-//  *
-//  * Augmente le compteur de touches du navire. Si le navire est touché pour la première fois,
-//  * met à jour les statistiques du jeu. Si toutes les parties du navire sont touchées, le navire
-//  * est marqué comme coulé, et les statistiques et le plateau de jeu sont mis à jour
-//  *
-//  * @param navire Pointeur vers le navire qui a été touché
-//  * @param plateau Pointeur vers le plateau de jeu principal
-//  * @param action_plateau Pointeur vers le plateau d'action utilisé pour marquer les tirs
-//  * @param navire_coule Pointeur vers le compteur des navires coulés
-//  * @param stats Pointeur vers les statistiques du jeu
-//  */
-// void gerer_touche_navire(Navire *navire,int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
+/**
+ * Marque un navire comme étant coulé en changeant les symboles sur les plateaux 
+ * de jeu et d'action et met à jour les statistiques
+ *
+ * @param navire Un pointeur vers le Navire coulé
+ * @param plateau Un pointeur vers le plateau de jeu principal
+ * @param action_plateau Un pointeur vers le plateau d'action
+ * @param navire_coule Un pointeur vers le compteur du nombre total de navires coulés
+ * @param stats Un pointeur vers les statistiques du jeu
+ */
+void gerer_navire_coule(Navire *navire, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
 // /**
 //  * Détecte si un tir touche une partie d'un navire sur le plateau. Parcourt les positions
