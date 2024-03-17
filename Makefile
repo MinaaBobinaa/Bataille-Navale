@@ -21,7 +21,7 @@ $(TARGET): $(OBJECTS)
 # Test
 # ----
 
-test: test-bataille_navale cunits
+test: test-bataille_navale
 
 test-bataille_navale: $(TARGET) bataille_navale.bats
 	$(bats) bataille_navale.bats
@@ -44,4 +44,4 @@ clean:
 
 #Phony
 #----
-.PHONY: build test clean
+.PHONY: build test cunits clean
