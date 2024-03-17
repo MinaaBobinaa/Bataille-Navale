@@ -2,10 +2,7 @@
 #include "../include/stats.h"
 #include <stdio.h>
 #include <stdlib.h>
-
 #include <CUnit/Basic.h>
-
-
 
 
 void test_allouer_plateau() {
@@ -26,17 +23,42 @@ void test_allouer_plateau() {
     free(plateau);
 }
 
-/**
-* Attention, il faut absolument avoir une fonction main pour pouvoir effectuer les tests
-* En voici une pour l'exemple avec les tests qui sont fait.
-* Je vous laisse donc aller faire des recherches supplementaires la dessus.
-* N'hesitez pas a faire man cunit pour chercher les assertions interessantes pour vos tests
-*/
+void test_verifier_placement() {
+    int taille_plateau = 5;
+    char **plateau = allouer_plateau(taille_plateau);
+
+    Case debut = {0, 0};
+    int taille_bateau = 3;
+    CU_ASSERT_TRUE(verifier_placement(plateau, debut, taille_bateau, 0, taille_plateau));
+    debut.x = 4;
+    CU_ASSERT_FALSE(verifier_placement(plateau, debut, taille_bateau, 1, taille_plateau));
+
+    for (int i = 0; i < taille_plateau; i++) {
+        free(plateau[i]);
+    }
+    free(plateau);
+}
+
+void test_valider_taille() {
+    // Test cases for boundary values and beyond
+    CU_ASSERT_TRUE(valider_taille(TAILLE_MIN_PLATEAU));
+    CU_ASSERT_TRUE(valider_taille(TAILLE_MAX_PLATEAU));
+    CU_ASSERT_FALSE(valider_taille(TAILLE_MIN_PLATEAU - 1));
+    CU_ASSERT_FALSE(valider_taille(TAILLE_MAX_PLATEAU + 1));
+    // You can add more test cases as needed
+}
+
 int main() {
     CU_initialize_registry();
 
-    CU_pSuite suite2 = CU_add_suite("Plateau Allocation Test", NULL, NULL);
-    CU_add_test(suite2, "test_allouer_plateau", test_allouer_plateau);
+    CU_pSuite suite1 = CU_add_suite("Plateau Allocation Test", NULL, NULL);
+    CU_add_test(suite1, "test_allouer_plateau", test_allouer_plateau);
+
+    CU_pSuite suite2 = CU_add_suite("Vérification Placement Test", NULL, NULL);
+    CU_add_test(suite2, "test_verifier_placement", test_verifier_placement);
+
+    CU_pSuite suite3 = CU_add_suite("Suite de Validation Taille Plateau", NULL, NULL);
+    CU_add_test(suite3, "test_valider_taille", test_valider_taille);
 
     CU_basic_set_mode(CU_BRM_VERBOSE);
     CU_basic_run_tests();
