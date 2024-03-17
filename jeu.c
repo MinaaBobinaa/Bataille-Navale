@@ -5,6 +5,8 @@
 #include <string.h>
 #include <time.h>
 
+#include <CUnit/Basic.h>
+
 
 void commencer_jeu() {
    printf(MESSAGE_DEBUT_JEU);
