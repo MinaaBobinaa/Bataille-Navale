@@ -113,15 +113,25 @@ void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_p
    }
 }
 
+/**
+ * Vérifie si la taille spécifiée est dans l'intervalle autorisé pour le plateau de jeu
+ *
+ * @param taille La taille à vérifier.
+ * @return Un entier non nul si la taille est dans l'intervalle sinon zéro 
+ */
+int valider_taille(int taille) {
+    return taille >= TAILLE_MIN_PLATEAU && taille <= TAILLE_MAX_PLATEAU;
+}
+
 int valider_taille_plateau(void){
    int taille;
    do {
       printf("Entrez la taille du plateau de jeu (min %d, max %d): ", TAILLE_MIN_PLATEAU, TAILLE_MAX_PLATEAU);
       scanf("%d", &taille);
-      if (taille < TAILLE_MIN_PLATEAU || taille > TAILLE_MAX_PLATEAU) {
+      if (!valider_taille(taille)) {
          printf("Taille invalide. La taille doit être entre %d et %d.\n", TAILLE_MIN_PLATEAU, TAILLE_MAX_PLATEAU);
       }
-   } while (taille < TAILLE_MIN_PLATEAU || taille > TAILLE_MAX_PLATEAU);
+   } while (!valider_taille(taille));
    return taille;
 }
 

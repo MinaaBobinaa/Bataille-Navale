@@ -134,6 +134,8 @@ void gerer_navire_coule(Navire *navire, char **plateau, char **action_plateau, i
  */
 void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
+int valider_taille(int taille);
+
 /**
  * Demande à l'utilisateur d'entrer la taille du plateau de jeu et valide l'entrée
  *
