@@ -113,14 +113,8 @@ void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_p
    }
 }
 
-/**
- * Vérifie si la taille spécifiée est dans l'intervalle autorisé pour le plateau de jeu
- *
- * @param taille La taille à vérifier.
- * @return Un entier non nul si la taille est dans l'intervalle sinon zéro 
- */
 int valider_taille(int taille) {
-    return taille >= TAILLE_MIN_PLATEAU && taille <= TAILLE_MAX_PLATEAU;
+   return taille >= TAILLE_MIN_PLATEAU && taille <= TAILLE_MAX_PLATEAU;
 }
 
 int valider_taille_plateau(void){

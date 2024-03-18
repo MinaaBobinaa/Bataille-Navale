@@ -134,6 +134,12 @@ void gerer_navire_coule(Navire *navire, char **plateau, char **action_plateau, i
  */
 void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats);
 
+/**
+ * Vérifie si la taille spécifiée est dans l'intervalle autorisé pour le plateau de jeu
+ *
+ * @param taille La taille à vérifier.
+ * @return Un entier non nul si la taille est dans l'intervalle sinon zéro 
+ */
 int valider_taille(int taille);
 
 /**
