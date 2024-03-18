@@ -1,93 +1,196 @@
-# inf3135-hiver2024-tp2
+# Travail pratique 2
 
+---
 
+## Identification
 
-## Getting started
+- **Nom : Naas**
+- **Prénoms : Yasmine**
+- **Code permanent : NAAY87620206**
 
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
+---
 
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
+## Description du programme:
+Le programme est un jeu de bataille navale interactif, où le joueur commence 
+par choisir la taille du plateau de jeu, avec une limite minimale de 6x6 et 
+maximale de 100x100 cases. Sur ce plateau, le programme dispose aléatoirement
+cinq navires de tailles variées : un Porte-avions de 5 cases, un Croiseur de 4
+cases, deux Contre-torpilleurs de 3 cases chacun, et un Torpilleur de 2 cases.
 
-## Add your files
+Le joueur engage le jeu en sélectionnant des cases pour lancer des torpilles,
+dans le but de toucher et couler ces navires. L'objectif pour le joueur est de
+couler tous les navires adverses. 
+Le jeu se poursuit jusqu'à ce que tous les navires soient
+coulés.
 
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
+Ce jeu combine stratégie, anticipation et un élément de chance, offrant
+une expérience ludique enrichissante tout en restant fidèle à l'esprit
+classique de la bataille navale.
 
+## Clone et création dépôt:
+
+Vous devez tout d'abord cloner ce dépôt dans un repertoire en suivant les 
+commandes suivantes:
+
+```bash
+$ git clone https://gitlab.info.uqam.ca/naas.yasmine/inf3135-hiver2024-tp2.git
 ```
-cd existing_repo
-git remote add origin https://gitlab.info.uqam.ca/naas.yasmine/inf3135-hiver2024-tp2.git
-git branch -M main
-git push -uf origin main
+
+Vous devez également installer les sous-modules Git permettant d'utiliser Bats.
+Pour cela, il suffit d'entrer la commande:
+
+```bash
+$ git submodule update --init
 ```
 
-## Integrate with your tools
+Pour excecuter les tests unitaires (CUnits) vous devez entrer cette commande:
 
-- [ ] [Set up project integrations](https://gitlab.info.uqam.ca/naas.yasmine/inf3135-hiver2024-tp2/-/settings/integrations)
+```bash
+$ sudo apt install libcunit1 libcunit1-doc libcunit1-dev
+```
 
-## Collaborate with your team
+## Compilation et Exécution:
 
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
+Pour compiler le programme, utilisez la commande suivante dans le terminal :
 
-## Test and Deploy
+```bash
+$ gcc -Wall -Wextra -std=c99 -o bataille_navale main.c jeu.c stats.c
+```
+Après compilation, exécutez 'bataille_navale' sans ou avec les arguments qui suivent:
 
-Use the built-in continuous integration in GitLab.
+```bash
+$ ./bataille_navale
+```
+La commande ci-dessous enregistrera les statistiques du jeu dans un fichier stats.txt:
+```bash
+$ ./bataille_navale -S stats.txt
+```
+## Comportement du jeu:
 
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
 
-***
+A l'excecution du jeu, vous aurez un menu qui se representera sous cette forme:
 
-# Editing this README
+```bash
+================================================
+Bienvenue dans le jeu de bataille navale !
+================================================
+Choisissez une option :
 
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
+1. Nouvelle partie
+2. Quitter
+```
+Si vous entrez '2' au clavier, cela terminera l'execution du programme. 
 
-## Suggestions for a good README
+A la saisie de '1', vous commencerez une nouvelle partie.
+Pour débuter le jeu, vous serez invité à entrer la taille du plateau de jeu.
+Voici ce à quoi s'attendre :
 
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
+```bash
+$ Entrez la taille du plateau de jeu (min 6, max 100):
+0
+$ Taille invalide. La taille doit être entre 6 et 100.
+$ Entrez la taille du plateau de jeu (min 6, max 100): 
+101
+$ Taille invalide. La taille doit être entre 6 et 100.
+$ Entrez la taille du plateau de jeu (min 6, max 100): 
+6
+$ Entrez les coordonnées de tir (x y): 
+```
+Apres la validation de la taille du plateau, le jeu demandera au joeur d'entrer les 
+coordonnees de tir.
+Voici ce à quoi s'attendre pour un plateau de taille 6:
 
-## Name
-Choose a self-explaining name for your project.
+```bash 
+$ Entrez les coordonnées de tir (x y): a b
+$ Entrée non valide. Veuillez entrer des nombres.
 
-## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+$ Entrez les coordonnées de tir (x y): 1 10
+Coordonnées hors du plateau. Veuillez entrer des coordonnées valides entre 0 et 5 pour les deux axes.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+$ Entrez les coordonnées de tir (x y): 0 0
+Touché!
+x . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+```
+Veuillez noter que les symboles et messages vont variez après chaque tir.
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+Le plateau de jeu est affiché à l'écran avec les symboles suivants pour représenter
+l'état actuel :
+- `x` : Une case jouée qui touche un navire.
+- `o` : Une case jouée ne contenant aucun navire.
+- `.` : Une case qui n'a pas encore été jouée.
+- `+` : Les cases qui coule un navire.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
+**Résultat du Tir** :
+- **Touché** : Si un navire se trouve sur la case visée, le jeu affiche `Touché!`
+- **À l'eau** : Si aucune partie d'un navire n'occupe la case, le jeu affiche `À l'eau`
+- **Déjà joué** : Si la case a déjà été ciblée auparavant, le jeu vous invite à choisir une nouvelle case
+- **Vous avez coulé (navire)** : Si un navire a été coulé
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
+```bash
+$ Entrez les coordonnées de tir (x y): 0 1
+Vous avez coulé un(e) Torpilleur!
++ + . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
 
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
+$ Entrez les coordonnées de tir (x y): 0 2
+À l\'eau!
++ + o . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
+. . . . . . 
 
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
+$ Entrez les coordonnées de tir (x y): 0 2
+Déjà joué.
 
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
+$ Entrez les coordonnées de tir (x y): 
+```
 
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
+A la fin du jeu, le programme affichera un message qui indiquera en combien de coups
+vous avez gagné la partie:
 
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
+```bash
+$ Entrez les coordonnées de tir (x y): 3 5
+Vous avez coulé un(e) Contre-torpilleur 1!
++ + o o o o 
++ + + + + . 
+o o o o o o 
+o + + + . + 
+o + + + + + 
+. o o . o + 
+================================================
+Bravo !! Vous avez gagné en 32 coups.
+================================================
+```
+Si vous avez executer le programme avec `-S stats.txt`, vous pouvez consulter le fichier 
+de statistiques en ecrivant la commande suivante:
 
-## License
-For open source projects, say how it is licensed.
+```bash
+$ cat stats.txt
+```
+Votre fichier affichera différentes statistiques en fonction du déroulement du jeu.
+```text
+Nombre total de coups: 32
+Nombre de lettres sans doublon du premier navire touché: 8
+Nombre total de coups à l’eau: 15
+Nombre total de coups déjà joué: 2
+Nombre total de coups touché: 17
+Nom du dernier navire coulé: Contre-torpilleur 1
+```
 
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+---
+## Makefile:
+
+### Bats:
+### CUnit:
