@@ -1,7 +1,5 @@
 # Travail pratique 2
 
----
-
 ## Identification
 
 - **Nom : Naas**
@@ -173,7 +171,7 @@ o + + + + +
 Bravo !! Vous avez gagné en 32 coups.
 ================================================
 ```
-Si vous avez executer le programme avec `-S stats.txt`, vous pouvez consulter le fichier 
+Si vous avez executé le programme avec `-S stats.txt`, vous pouvez consulter le fichier 
 de statistiques en ecrivant la commande suivante:
 
 ```bash
@@ -191,6 +189,41 @@ Nom du dernier navire coulé: Contre-torpilleur 1
 
 ---
 ## Makefile:
+Le Makefile fourni est conçu pour faciliter la compilation, les tests et le nettoyage du
+jeu de bataille navale. Voici un aperçu de son fonctionnement et de ses commandes
+principales:
 
-### Bats:
-### CUnit:
+### Commande Principale
+- `make build`: Compile le projet en créant l'exécutable du jeu `bataille_navale`
+
+#### Plus de détails
+- `$(TARGET)`: Cette cible compile tous les fichiers objets (`$(OBJECTS)`) en
+utilisant les flags de compilation spécifiés (`$(CFLAGS)`) pour créer l'exécutable du projet.
+- `%.o`: Compile chaque fichier source `.c` en un fichier objet `.o`, permettant une 
+compilation séparée des différentes parties du projet.
+
+
+### Commande de test Bats
+- `make test`: Exécute les tests **Bats** du projet
+
+#### Plus de détails
+- `test-bataille_navale`: Cette cible utilise Bats pour exécuter les tests définis dans
+`bataille_navale.bats`, permettant de tester le fonctionnement du jeu.
+
+### Commande de test CUnit
+- `make cunits`: Compile et exécute les tests CUnit pour le projet,
+puis génère des rapports de couverture de code avec `gcov`.
+
+#### Plus de détails
+- Compile le fichier de test CUnit avec le fichier source `jeu.c`,
+crée l'exécutable de test, exécute les tests, puis utilise `gcov` pour 
+analyser la couverture de code des fichiers testés.
+
+### Commande de Nettoyage
+- `make clean`: Supprime tous les fichiers générés par le processus de build et
+de test, y compris les fichiers objets, l'exécutable, les fichiers de couverture 
+de code et les fichiers de statistiques.
+
+### Commande Phony
+- `.PHONY`: Déclare les cibles qui ne correspondent pas à des fichiers réels comme étant 'phony', évitant ainsi des conflits avec des fichiers de même nom et garantissant que les commandes sont toujours exécutées.
+
