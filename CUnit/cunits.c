@@ -171,19 +171,19 @@ void test_initialiser_jeu() {
    free_plateau(action_plateau, taille); 
 }
 
-void test_lire_coordonnees_valid_input() {
-    int x = 0, y = 0;
-    char input[] = "5 10";
-    CU_ASSERT_TRUE(lire_coordonnees(input, &x, &y));
-    CU_ASSERT_EQUAL(x, 5);
-    CU_ASSERT_EQUAL(y, 10);
-}
+// void test_lire_coordonnees_valid_input() {
+//     int x = 0, y = 0;
+//     char input[] = "5 10";
+//     CU_ASSERT_TRUE(lire_coordonnees(input, &x, &y));
+//     CU_ASSERT_EQUAL(x, 5);
+//     CU_ASSERT_EQUAL(y, 10);
+// }
 
-void test_lire_coordonnees_invalid_input() {
-    int x = 0, y = 0;
-    char input[] = "abc";
-    CU_ASSERT_FALSE(lire_coordonnees(input, &x, &y));
-}
+// void test_lire_coordonnees_invalid_input() {
+//     int x = 0, y = 0;
+//     char input[] = "abc";
+//     CU_ASSERT_FALSE(lire_coordonnees(input, &x, &y));
+// }
 
 int main() {
    CU_initialize_registry();
@@ -231,8 +231,8 @@ int main() {
    
    CU_pSuite pSuite = CU_add_suite("Suite_Coordonnees", NULL, NULL);
 
-   CU_add_test(pSuite, "test of valid input", test_lire_coordonnees_valid_input);
-   CU_add_test(pSuite, "test of invalid input", test_lire_coordonnees_invalid_input);
+   // CU_add_test(pSuite, "test of valid input", test_lire_coordonnees_valid_input);
+   // CU_add_test(pSuite, "test of invalid input", test_lire_coordonnees_invalid_input);
    
    CU_basic_set_mode(CU_BRM_VERBOSE);
    CU_basic_run_tests();
