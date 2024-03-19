@@ -96,7 +96,7 @@ void gerer_navire_coule(Navire *navire, char **plateau, char **action_plateau, i
    if (stats) {
       strcpy(stats->dernier_navire, navire->nom);
    }
-   printf("Vous avez coulé un(e) %s!\n", navire->nom);
+   printf("Vous avez coulé un(e) %s de taille %d!\n", navire->nom, navire->taille);
 }
 
 void touche_navire(Navire *navire, int x, int y, char **plateau, char **action_plateau, int *navire_coule, GameStats *stats) {
