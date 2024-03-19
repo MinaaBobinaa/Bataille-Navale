@@ -146,7 +146,7 @@ int lire_coordonnees(char *input, int *x, int *y) {
    int resultat = 1;
    if (sscanf(input, "%d %d", x, y) != 2) {
       printf("Entrée non valide. Veuillez entrer des nombres.\n");
-      nettoyer_stdin();
+      //nettoyer_stdin();
       resultat = 0;
    }
    return resultat;
