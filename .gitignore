@@ -6,9 +6,9 @@ cunits
 *.o
 
 # Fichiers de couverture de code générés par gcov
-*.gcno
-*.gcda
-*.gcov
+#*.gcno
+#*.gcda
+#*.gcov
 
 # Fichiers et dossiers temporaires
 tmp
