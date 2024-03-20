@@ -132,7 +132,7 @@ l'état actuel :
 
 ```bash
 $ Entrez les coordonnées de tir (x y): 0 1
-Vous avez coulé un(e) Torpilleur!
+Vous avez coulé un(e) Torpilleur de taille 2!
 + + . . . . 
 . . . . . . 
 . . . . . . 
@@ -160,7 +160,7 @@ vous avez gagné la partie:
 
 ```bash
 $ Entrez les coordonnées de tir (x y): 3 5
-Vous avez coulé un(e) Contre-torpilleur 1!
+Vous avez coulé un(e) Contre-torpilleur 1 de taille 3!
 + + o o o o 
 + + + + + . 
 o o o o o o 
@@ -218,6 +218,13 @@ puis génère des rapports de couverture de code avec `gcov`.
 - Compile le fichier de test CUnit avec le fichier source `jeu.c`,
 crée l'exécutable de test, exécute les tests, puis utilise `gcov` pour 
 analyser la couverture de code des fichiers testés.
+
+### Commande HTML
+- `make html` est utilisée pour convertir le fichier `README.md` en une version HTML, facilitant ainsi sa lecture dans un navigateur web. Cette opération est effectuée à l'aide de `pandoc`.
+
+#### Plus de détails
+- Cette commande prend le contenu du fichier spécifié dans la variable `README` et génère un fichier HTML dans l'emplacement spécifié par la variable `README_HTML`.
+- Il est nécessaire que `pandoc` soit installé sur votre système pour que cette commande fonctionne correctement.
 
 ### Commande de Nettoyage
 - `make clean`: Supprime tous les fichiers générés par le processus de build et
