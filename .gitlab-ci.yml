@@ -14,9 +14,6 @@ build_job:
   stage: build
   script:
     - make build
-  artifacts:
-    paths:
-      - bataille_navale
 
 test_job:
   stage: test

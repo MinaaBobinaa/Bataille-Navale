@@ -11,6 +11,7 @@ STATFILE=cunits-stats.gcda cunits-stats.gcno stats.c.gcov stats_test_output.txt
 
 # Build
 # -----
+pre-build: clean
 
 build: $(TARGET)
 
