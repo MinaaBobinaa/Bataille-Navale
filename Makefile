@@ -8,6 +8,8 @@ FILE=stats.txt
 CUNITSFILE=cunits cunits.c.gcov cunits-cunits.gcda cunits-cunits.gcno 
 JEUFILE=cunits-jeu.gcda cunits-jeu.gcno jeu.c.gcov
 STATFILE=cunits-stats.gcda cunits-stats.gcno stats.c.gcov stats_test_output.txt
+README=README.md
+README_HTML=README.html
 
 # Build
 # -----
@@ -39,13 +41,23 @@ cunits:
 	gcov ./cunits-jeu
 	gcov ./cunits-stats
 
+# HTML
+# ----
+
+html:
+	pandoc $(README) -o $(README_HTML)
+
+
 # Clean
 # ----
 
 clean:
 	rm -f $(OBJECTS) $(TARGET) $(FILE)
 	rm -f $(CUNITSFILE) $(JEUFILE) $(STATFILE)
+	rm -f $(README_HTML)
+
+
 
 #Phony
 #----
-.PHONY: build test cunits clean
+.PHONY: build test cunits  html clean
