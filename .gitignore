@@ -1,5 +1,22 @@
-bataille_navale 
-stats.txt
+# Fichiers exécutables
+bataille_navale
+cunits
 
-# Ignore files with extensions .o
-.o
+# Fichiers objet
+*.o
+
+# Fichiers de couverture de code générés par gcov
+*.gcno
+*.gcda
+*.gcov
+
+# Fichiers et dossiers temporaires
+tmp
+temp
+
+# Fichiers de données de test ou fichiers spécifiques aux tests
+stats.txt
+stats_test_output.txt
+
+# Fichier HTML généré à partir du README.md
+README.html
