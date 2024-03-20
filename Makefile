@@ -5,10 +5,15 @@ SOURCES = main.c jeu.c stats.c
 OBJECTS=$(SOURCES:.c=.o)
 TARGET=bataille_navale 
 FILE=stats.txt
-CUNITSFILE=cunits cunits.c.gcov cunits-cunits.gcda cunits-cunits.gcno cunits-jeu.gcda cunits-jeu.gcno jeu.c.gcov
+CUNITSFILE=cunits cunits.c.gcov cunits-cunits.gcda cunits-cunits.gcno 
+JEUFILE=cunits-jeu.gcda cunits-jeu.gcno jeu.c.gcov
+STATFILE=cunits-stats.gcda cunits-stats.gcno stats.c.gcov stats_test_output.txt
+README=README.md
+README_HTML=README.html
 
 # Build
 # -----
+pre-build: clean
 
 build: $(TARGET)
 
@@ -30,18 +35,29 @@ test-bataille_navale: $(TARGET) bataille_navale.bats
 # CUnit
 # ----
 cunits:
-	$(CC) CUnit/cunits.c jeu.c -o cunits -lcunit -coverage
+	$(CC) CUnit/cunits.c jeu.c stats.c -o cunits -lcunit -coverage
 	./cunits
 	gcov ./cunits-cunits
 	gcov ./cunits-jeu
+	gcov ./cunits-stats
+
+# HTML
+# ----
+
+html:
+	pandoc $(README) -o $(README_HTML)
+
 
 # Clean
 # ----
 
 clean:
 	rm -f $(OBJECTS) $(TARGET) $(FILE)
-	rm -f $(CUNITSFILE)
+	rm -f $(CUNITSFILE) $(JEUFILE) $(STATFILE)
+	rm -f $(README_HTML)
+
+
 
 #Phony
 #----
-.PHONY: build test cunits clean
+.PHONY: build test cunits  html clean

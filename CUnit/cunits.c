@@ -71,11 +71,8 @@ void test_verifier_placement() {
 void test_placer_navire() {
    int taille_plateau = 10;
    char **plateau = allouer_plateau(taille_plateau);
-   Navire navire = {
-      .taille = 3,
-      .nom = "Destroyer",
-      .touche = 0,
-      .nbr_lettres = 9 
+   Navire navire = {.taille = 3, .nom = "Destroyer",
+      .touche = 0, .nbr_lettres = 9 
    };
    placer_navire(plateau, &navire, taille_plateau);
    CU_PASS("placer_navire called successfully.");
@@ -171,19 +168,53 @@ void test_initialiser_jeu() {
    free_plateau(action_plateau, taille); 
 }
 
-void test_lire_coordonnees_valid_input() {
-    int x = 0, y = 0;
-    char input[] = "5 10";
-    CU_ASSERT_TRUE(lire_coordonnees(input, &x, &y));
-    CU_ASSERT_EQUAL(x, 5);
-    CU_ASSERT_EQUAL(y, 10);
+void test_verifier_coordonnees_valide() {
+   int taille = 10; 
+   CU_ASSERT_TRUE(verifier_coordonnees(0, 0, taille));
+   CU_ASSERT_TRUE(verifier_coordonnees(5, 5, taille));
+   CU_ASSERT_TRUE(verifier_coordonnees(taille-1, taille-1, taille));
 }
 
-void test_lire_coordonnees_invalid_input() {
-    int x = 0, y = 0;
-    char input[] = "abc";
-    CU_ASSERT_FALSE(lire_coordonnees(input, &x, &y));
+void test_verifier_coordonnees_invalide() {
+   int taille = 10; 
+   CU_ASSERT_FALSE(verifier_coordonnees(-1, 0, taille));
+   CU_ASSERT_FALSE(verifier_coordonnees(0, -1, taille));
+   CU_ASSERT_FALSE(verifier_coordonnees(taille, 0, taille));
+   CU_ASSERT_FALSE(verifier_coordonnees(0, taille, taille));
 }
+
+void test_proceder_tir_eau() {
+   int taille = 5;
+   char **plateau = allouer_plateau(taille);
+   char **action_plateau = allouer_plateau(taille);
+   Navire navires[5]; 
+   int tirs = 0, navire_coule = 0;
+   GameStats stats = {0};
+
+   proceder_tir(plateau, action_plateau, navires, 0, 0, &tirs, &navire_coule, &stats);
+   CU_ASSERT_EQUAL(tirs, 1);
+   CU_ASSERT_EQUAL(action_plateau[0][0], 'o');
+   CU_ASSERT_EQUAL(stats.coups_eau, 1);
+   free_plateau(plateau, taille);
+   free_plateau(action_plateau, taille);
+}
+
+void test_write_stats_file() {
+   GameStats stats;
+   init_stats(&stats);
+   stats.nbr_total_tirs = 5;
+   stats.nbr_lettres = 3;
+   stats.coups_eau = 2;
+   stats.deja_joue = 0;
+   stats.coups_touche = 3;
+   strcpy(stats.dernier_navire, "Croiseur");
+   stats.premier_touche = 1;
+
+   const char *nomFichierTest = "stats_test_output.txt";
+   write_stats_file(&stats, nomFichierTest);
+   printf("Les statistiques ont été écrites dans '%s'. Veuillez vérifier ce fichier manuellement.\n", nomFichierTest);
+}
+
 
 int main() {
    CU_initialize_registry();
@@ -228,12 +259,17 @@ int main() {
 
    CU_pSuite suite14 = CU_add_suite("Test d'Initialization", NULL, NULL);
    CU_add_test(suite14, "test of initialiser_jeu", test_initialiser_jeu);
-   
-   CU_pSuite pSuite = CU_add_suite("Suite_Coordonnees", NULL, NULL);
 
-   CU_add_test(pSuite, "test of valid input", test_lire_coordonnees_valid_input);
-   CU_add_test(pSuite, "test of invalid input", test_lire_coordonnees_invalid_input);
-   
+   CU_pSuite suite15 = CU_add_suite("Suite de test pour verifier_coordonnees", NULL, NULL);
+   CU_add_test(suite15, "test avec des coordonnées valides", test_verifier_coordonnees_valide);
+   CU_add_test(suite15, "test avec des coordonnées invalides", test_verifier_coordonnees_invalide);
+
+   CU_pSuite suite16 = CU_add_suite("Test proceder_tir", NULL, NULL);
+   CU_add_test(suite16, "test de tir dans l'eau", test_proceder_tir_eau);
+
+   CU_pSuite suite17 = CU_add_suite("Suite_Test_Stats", NULL, NULL);
+   CU_add_test(suite17, "test_write_stats_file", test_write_stats_file);
+  
    CU_basic_set_mode(CU_BRM_VERBOSE);
    CU_basic_run_tests();
 
