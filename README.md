@@ -1,12 +1,5 @@
-# Travail pratique 2
+# Jeu de bataille navale
 
-## Identification
-
-- **Nom : Naas**
-- **Prénoms : Yasmine**
-- **Code permanent : NAAY87620206**
-
----
 
 ## Description du programme:
 Le programme est un jeu de bataille navale interactif, où le joueur commence 
