@@ -18,15 +18,6 @@ Ce jeu combine stratégie, anticipation et un élément de chance, offrant
 une expérience ludique enrichissante tout en restant fidèle à l'esprit
 classique de la bataille navale.
 
-## Clone et création dépôt:
-
-Vous devez tout d'abord cloner ce dépôt dans un repertoire en suivant les 
-commandes suivantes:
-
-```bash
-$ git clone https://gitlab.info.uqam.ca/naas.yasmine/inf3135-hiver2024-tp2.git
-```
-
 Vous devez également installer les sous-modules Git permettant d'utiliser Bats.
 Pour cela, il suffit d'entrer la commande:
 
